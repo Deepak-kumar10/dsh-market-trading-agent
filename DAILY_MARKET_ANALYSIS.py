@@ -312,11 +312,7 @@ def generate_report():
     print("-" * 70)
     print("Daily market recommendations report template.")
     
-    print(f"{'#'.ljust(3), '{stock_name}'.ljust(21), 'Entry ₹{entry_price:,.0f}', 'Score', 'Target' if target else '-')}")
-    for i, pos in enumerate(buys[:5], 1):
-        score = pos.get('score', 0)
-        print(f"   {i:3}. {pos['stock_name']:38} {entry_price:>9,}" if pos['target'] else f"      Entry ₹{entry_price:>9,}")
-        print(f"          {buys[0]['score']:6.1f}/{len(buys)}  " if i == 1 else f"        Score: {pos.get('score', 'N/A')}")
+    print("No scored positions are available in this report template.")
 
 # ============================================================================
 # MAIN EXECUTION
