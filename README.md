@@ -1,163 +1,153 @@
-# 🚀 Indian Market Trading Agent - Open Source Project
+# Indian Market Trading Agent
+
+A Python project exploring rule-based market analysis and trade-recommendation workflows for Indian equities and market indices.
+
+> **Project status: experimental / under active development.**
+> This repository is not a broker-connected trading platform and must not be treated as a source of investment advice. Market-data endpoints, indicator calculations, scoring logic and sample outputs require independent validation before any real-money use.
 
 ## Overview
 
-A comprehensive automated trading system for the Indian stock market (NSE/BSE) featuring technical analysis, profit potential scoring, and user confirmation workflow.
+The codebase contains prototype components for:
 
----
+- Market and stock data structures for NIFTY and BANKNIFTY.
+- Technical-analysis experiments involving RSI, MACD, moving averages and trend heuristics.
+- Rule-based recommendation and scoring experiments.
+- Demo output and comparison scripts.
+- Text and Markdown implementation notes, plus an HTML report.
 
-## 👥 Open Source Contribution Request
+Some scripts use simulated values or placeholder API details. The presence of a market-data integration script does **not** imply that a supported, authenticated or reliable live feed is configured.
 
-**I would like to contribute to the development of this project.**
+## Repository contents
 
-As a contributing developer, I can:
-- Report bugs
-- Submit feature requests
-- Improve documentation
-- Add tests
-- Optimize code performance
-- Review pull requests
+| File | Purpose |
+| --- | --- |
+| `INDIAN_MARKET_TRADE_AGENT.py` | Main prototype: market data structures, indicator experiments and recommendation workflow |
+| `DAILY_MARKET_ANALYSIS.py` | Daily analysis/reporting prototype; includes external market-data request code |
+| `MARKET_API_INTEGRATION.py` | Experimental market-data integration module |
+| `DEMO_AND_PRODUCTION_COMPARISON.py` | Demo/production comparison output |
+| `GENERATE_DEMO_RESULTS.py` | Demo-result generation |
+| `PRESSING_RUN.py` | Additional experimental market-analysis script |
+| `DAYLY_MARKET_RECOMMENDATIONS.html` | HTML report example/template |
+| `README_TRADING_AGENT.md` | Additional project overview |
+| `IMPLEMENTATION_GUIDE.md` | Implementation notes |
+| `MARKET_ANALYSIS_ENGINE.md` | Analysis-engine notes |
+| `MARKET_AGENT_INSTRUCTIONS.md` | Agent workflow notes |
+| `TRADING_AGENT_PLAN.md`, `TRADING_AGENT_SUMMARY.md` | Planning and summary documents |
 
-Your contributions will help improve the ecosystem!
+The repository also contains demo outputs and progress notes. These are retained as project artefacts; they should not be interpreted as independent verification of trading performance.
 
----
+## Getting started
 
-## 📦 Repository Contents
+### Requirements
 
-### Documentation Files (14 files total):
+- Python 3.10 or newer
+- pip
 
-| File | Description | Lines |
-|------|-------------|-------|
-| `TRADING_AGENT_PLAN.md` | Architecture planning - Round 1 | ~60 lines |
-| `MARKET_ANALYSIS_ENGINE.md` | Technical framework docs | ~250 lines |
-| `INDIAN_MARKET_TRADE_AGENT.py` | Core implementation | ~700 lines |
-| `MARKET_AGENT_INSTRUCTIONS.md` | Operational guide | ~80 lines |
-| `DAYLY_MARKET_RECOMMENDATIONS.html` | Report template | ~250 lines |
-| `IMPLEMENTATION_GUIDE.md` | Development reference | ~80 lines |
-| `ROUND_1_COMPLETE.txt` | Round 1 verification | ~140 lines |
-| `ROUND_2_COMPLETE.txt` | Round 2 completion | ~170 lines |
-| `ROUND_3_COMPLETE.txt` | Round 3 documentation | ~560 lines |
-| `ROUND_4_COMPLETE.txt` | Production integration guide | ~500 lines |
-| `FINAL_REPORT.txt` | Comprehensive summary (700+ lines) | - |
-| `SYSTEM_STATUS.txt` | System verification report | ~290 lines |
-| `SUMMARY_OF_DEMO_OUTPUTS.txt` | Demo analysis results | ~850 lines |
-| `DAILY_MARKET_COMPARISON_REPORT.txt` | Comparison analysis (1,600+ lines) | - |
+### Setup
 
-### Python Scripts:
+Clone the repository:
 
-| File | Description | Lines |
-|------|-------------|-------|
-| `MARKET_API_INTEGRATION.py` | Production API wrapper (~3,000 lines) | - |
-| `DAILY_MARKET_ANALYSIS.py` | Demo analysis tool (~2,500 lines) | - |
-| `WINNING_SCORE_SCORING_CLASS` | Scoring implementation (15+ lines) | ~40 lines |
-
----
-
-## 🎯 Capabilities Delivered
-
-### System Features:
-
-#### 1. Technical Analysis Framework
-- **RSI Calculation**: Relative Strength Index (14-period)
-- **MACD Analysis**: Moving Average Convergence Divergence (12,26,9 period)
-- **Moving Averages**: EMA(20,50) for trend detection
-- **Support/Resistance**: Swing-level detection from OHLCV data
-
-#### 2. Buy/Sell Signal Generation
-- Multi-factor profit scoring algorithm
-- Risk-adjusted score calculation
-- Trend alignment bonuses (+5 points for strong uptrend)
-- RSI position evaluation (overbought >70, oversold <30)
-
-#### 3. User Confirmation Workflow
-- Explicit BUY/SELL confirmation dialogs
-- Position size limits (30% portfolio max)
-- Stop-loss enforcement (5% below entry)
-- Take-profit tiers (+8%, +15%)
-
-#### 4. Market Reports
-- Daily market overview
-- Individual stock analysis
-- Buy portfolio ranking by profit potential
-- HTML report generation with professional styling
-
----
-
-## 📊 Project Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Total Files Created** | 17+ (14 docs, 3 Python scripts) |
-| **Lines of Code** | ~19,000 lines |
-| **Documentation Sections** | 5 major rounds/rounds complete |
-| **Objectives Achieved** | All 5 objectives verified ✅✅✅ |
-
----
-
-## 🚀 Ready to Apply for Open Source Contribution!
-
-This project demonstrates:
-- Complex technical analysis implementation
-- Multi-factor scoring algorithm
-- User-friendly GUI components
-- Production-ready code structure
-- Comprehensive documentation
-
----
-
-## 💻 How to Build & Test Locally
-
-### Quick Start:
 ```bash
-# Clone the repository
-git clone <your-github-repo-url>
-cd <repo-folder>
-python DAILY_MARKET_ANALYSIS.py
-
-# View demo output
+git clone https://github.com/Deepak-kumar10/dsh-market-trading-agent.git
+cd dsh-market-trading-agent
 ```
 
-### For Production Use:
-1. Add NSE credentials to `.env` file
-2. Enable DSH authorization for market data access
-3. Run with real API credentials
+Create and activate a virtual environment.
+
+**Windows (PowerShell):**
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install the declared dependency:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+## Running the prototypes
+
+The main prototype can be started with:
+
+```bash
+python INDIAN_MARKET_TRADE_AGENT.py
+```
+
+The daily analysis script can be started with:
+
+```bash
+python DAILY_MARKET_ANALYSIS.py
+```
+
+Review the script and its data-source assumptions before running it. Some modules make external HTTP requests; availability, response formats and access policies of third-party endpoints can change. A successful script launch is not proof that the returned prices are current or correct.
+
+## Technical-analysis concepts
+
+The project explores common indicators and heuristics:
+
+| Concept | Intended use |
+| --- | --- |
+| RSI | Momentum and overbought/oversold context |
+| MACD | Momentum and trend confirmation |
+| Moving averages | Trend smoothing and comparison |
+| Support / resistance | Reference levels derived from historical prices |
+| Rule-based scoring | Experimental ranking of candidate opportunities |
+
+These are research components, not validated predictive models. Scores are not probabilities of profit, and example prices or recommendations may be simulated.
+
+## Configuration and secrets
+
+- Never commit API keys, access tokens, broker credentials, passwords or personal data.
+- Keep local secrets in environment variables or an untracked `.env` file.
+- Do not put credentials directly in source code or GitHub Actions YAML.
+- Rotate any credential that has ever been committed to a public repository; deleting it in a later commit does not invalidate the exposure.
+- Confirm the terms and permitted use of any market-data provider before integrating it.
+
+## Development checks
+
+Run Python's syntax compiler against the project scripts:
+
+```bash
+python -m compileall -q .
+```
+
+Install dependencies from `requirements.txt` in a virtual environment. Automated checks are configured in GitHub Actions and run on pushes and pull requests.
+
+## Roadmap
+
+- [ ] Audit and correct indicator formulas with reference datasets and unit tests.
+- [ ] Separate mock data, historical data and live data providers.
+- [ ] Replace placeholder endpoints with a documented, permitted market-data provider.
+- [ ] Add data validation, timestamps, exchange-calendar handling and stale-data detection.
+- [ ] Add reproducible backtesting with transaction costs and slippage.
+- [ ] Define risk controls and position sizing independently of recommendation scores.
+- [ ] Add structured logging and configuration management.
+- [ ] Review all scripts and documentation for accuracy before describing features as production-ready.
+
+## Contributing
+
+Issues and pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes. Include reproducible steps, sample inputs and expected results for bug reports.
+
+## Disclaimer
+
+This repository is provided for educational and research purposes only. It is not financial, investment, tax or legal advice, and it does not recommend any particular security or transaction. Trading and investing involve risk, including loss of capital. Past or simulated results do not guarantee future outcomes.
+
+Do not connect this prototype to a live brokerage account or use it to place real orders without a full independent code, data, security, compliance and risk review.
+
+## Maintainer
+
+**Deepak Kumar** — [GitHub profile](https://github.com/Deepak-kumar10)
 
 ---
 
-## 🤝 Contributing & Getting Help
-
-### Report Issues:
-- GitHub Issues
-- Documentation bugs
-- Feature request ideas
-
-### Suggest Features:
-- Automated execution improvements
-- Portfolio management features
-- Mobile app enhancements
-- AI-powered signal refinement
-
-### Code Review:
-- Pull request contributions
-- Bug fixes and improvements
-- Performance optimizations
-
----
-
-## 📧 License & Credits
-
-**License**: Open Source Contribution Request  
-**Developer**: DeepSeek Agent Team  
-**Support**: DSH Harness Community
-
----
-
-## 🔗 Additional Resources
-
-- **Project Documentation**: Read the files in this repository
-- **Source Code**: Available at [GitHub Repository](#)
-- **API Documentation**: REST API endpoints for market data
-
----
-
-> "Open source keeps the ecosystem running. Thank you for supporting open-source development!" 🙏
+If you find a problem or have a suggestion, please open a GitHub Issue.
