@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; background: white; border-radius: 16px; padding: 2rem; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2); }
+        h1 { color: #333; text-align: center; margin-bottom: 1.5rem; font-size: 2rem; }
+        .controls { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+        input[type="text"] { flex: 1; padding: 0.8rem 1rem; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem; transition: border-color 0.2s; }
+        input[type="text"]:focus { outline: none; border-color: #667eea; }
+        button { padding: 0.8rem 1.5rem; background: #667eea; color: white; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #5a6fd6; }
+        .categories { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+        .category { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
+        .category.active { background: #667eea; color: white; }
+        .category:hover:not(.active) { background: #f0f0f0; }
+        .task-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .task-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; transition: all 0.2s; }
+        .task-item:hover { background: #e9ecef; transform: translateX(5px); }
+        .task-checkbox { width: 24px; height: 24px; cursor: pointer; accent-color: #667eea; }
+        .task-text { flex: 1; font-size: 1rem; color: #333; }
+        .task-tags { display: flex; gap: 0.25rem; }
+        .tag { padding: 0.2rem 0.6rem; background: #e74c3c; color: white; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; }
+        .tag.success { background: #27ae60; }
+        .delete-btn { padding: 0.3rem 0.6rem; background: #e74c3c; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.85rem; }
+        .delete-btn:hover { background: #c0392b; }
+        .empty-state { text-align: center; padding: 3rem; color: #666; }
+        .empty-state h3 { margin-bottom: 0.5rem; }
+        @media (max-width: 600px) { .container { padding: 1.5rem; } h1 { font-size: 1.5rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Task Manager</h1>
+        <div class="controls">
+            <input type="text" id="newTaskInput" placeholder="Enter a new task...">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <div class="categories" id="categoryButtons"></div>
+        <ul class="task-list" id="taskList"></ul>
+        <div class="empty-state" id="emptyState">
+            <h3>No tasks yet</h3>
+            <p>Add a task to get started!</p>
+        </div>
+    </div>
+    <script>
+        const categories = ['Work', 'Personal', 'Shopping', 'Learning', 'Health'];
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        document.getElementById('newTaskInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') addTask(); });
+
+        function getCategoryText(category) {
+            const map = { Work: 'Work', Personal: 'Personal', Shopping: 'Shopping', Learning: 'Learning', Health: 'Health' };
+            return map[category] || category;
+        }
+
+        function formatTime(dateString) { if (!dateString) return ''; const date = new Date(dateString); return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
+
+        function formatDate(dateString) { if (!dateString) return ''; const date = new Date(dateString); return date.toLocaleDateString(); }
+
+        function createTaskElement(task, index) {
+            const li = document.createElement('li');
+            li.className = 'task-item';
+            const checkCircle = document.createElement('input'); checkCircle.type = 'checkbox'; checkCircle.className = 'task-checkbox'; checkCircle.checked = task.completed;
+            checkCircle.addEventListener('change', () => toggleTask(index));
+            const span = document.createElement('span');
+            span.className = 'task-text';
+            span.textContent = `${index + 1}. ${formatDate(task.date)} - ${escapeHtml(task.text)}`;
+            if (task.category) {
+                const tagContainer = document.createElement('div');
+                tagContainer.className = 'task-tags';
+                if (task.category === 'Work') {
+                    const workTag = document.createElement('span'); workTag.className = 'tag success'; workTag.textContent = getCategoryText(task.category);
+                    tagContainer.appendChild(workTag);
+                } else if (task.category === 'Personal') {
+                    personalTag = document.createElement('span'); personalTag.className = 'tag'; personalTag.textContent = task.category.charAt(0).toUpperCase() + task.category.slice(1);
+                    tagContainer.appendChild(personalTag);
+                } else {
+                    const tag = document.createElement('span'); tag.className = 'tag'; tag.textContent = getCategoryText(task.category);
+                    tagContainer.appendChild(tag);
+                }
+            }
+            const deleteBtn = document.createElement('button'); deleteBtn.className = 'delete-btn'; deleteBtn.textContent = 'Delete'; deleteBtn.addEventListener('click', () => deleteTask(index));
+            li.appendChild(checkCircle); li.appendChild(span); li.appendChild(deleteBtn); return li;
+        }
+
+        function addTask() { const input = document.getElementById('newTaskInput'); const text = input.value.trim(); if (!text) return; tasks.unshift({ id: Date.now(), text: text, category: '', completed: false, date: new Date().toISOString() }); saveAndRender(); input.value = ''; }
+        function toggleTask(index) { const task = tasks[index]; task.completed = !task.completed; saveAndRender(); }
+        function deleteTask(index) { tasks.splice(index, 1); saveAndRender(); }
+        function saveAndRender() { localStorage.setItem('tasks', JSON.stringify(tasks)); render(); }
+
+        function render() {
+            const list = document.getElementById('taskList'); const emptyState = document.getElementById('emptyState'); const categoryContainer = document.getElementById('categoryButtons');
+            list.innerHTML = ''; if (tasks.length === 0) { emptyState.style.display = 'block'; list.style.display = 'none'; } else { emptyState.style.display = 'none'; list.style.display = 'flex'; tasks.forEach((task, index) => { const li = createTaskElement(task, index); list.appendChild(li); }); }); renderCategories();
+        }
+
+        function renderCategories() { categoryContainer.innerHTML = categories.map(cat => '<span class="category ' + (cat === '' ? 'active' : '') + '" onclick="selectCategory(\'' + escapeHtml(cat) + '\')"'>" + cat + '</span>').join(''); }
+        function escapeHtml(text) { const map = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }; return text.replace(/[&<>"']/g, m => map[m]); }
+        render();
+    </script>
+</body>
+</html>

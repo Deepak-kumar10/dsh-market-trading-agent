@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Indian Market Trading Recommendations - {date}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #1a1a2e; color: #eee; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid #e94560; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { color: #e94560; font-size: 2.5em; margin-bottom: 10px; }
+        .date-badge { background: #e94560; padding: 5px 15px; border-radius: 5px; }
+        .section { background: #16213e; border-radius: 10px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .title { color: #e94560; font-size: 1.3em; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .data-table th, .data-table td { padding: 12px; text-align: left; border-bottom: 1px solid #1a1a2e; }
+        .data-table th { background: #0f3460; color: #eee; }
+        .data-table tr:hover { background: #1a1a2e; }
+        .signal { padding: 10px; margin: 5px 0; border-left: 4px solid #4caf50; background: #0f3460; }
+        .buy { border-color: #4caf50; color: #4caf50; }
+        .sell { border-color: #f44336; color: #f44336; }
+        .neutral { border-color: #2196f3; color: #2196f3; }
+        .score-badge { background: #e94560; padding: 3px 8px; border-radius: 15px; font-weight: bold; margin-left: 10px; }
+        .risk-indicator { background: #2196f3; padding: 5px 10px; border-radius: 15px; display: inline-block; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Indian Market Trading Agent</h1>
+        <span class="date-badge">{date}</span>
+    </div>
+
+    <div class="section">
+        <div class="title">🏛️ MARKET INDEX ANALYSIS</div>
+        <table class="data-table">
+            <tr>
+                <th style="width: 10%;">Market</th>
+                <th>Current Price</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>NIFTY 50</td>
+                <td id="nifty-price">-</td>
+                <td id="nifty-status" style="color: #f44336;">NEUTRAL</td>
+            </tr>
+            <tr>
+                <td>BANKNIFTY</td>
+                <td id="banknifty-price">-</td>
+                <td id="banknifty-status" style="color: #f44336;">NEUTRAL</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="title">🎯 INDIVIDUAL STOCK ANALYSIS</div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Rank</th>
+                    <th>Stock Name</th>
+                    <th>Entry Price</th>
+                    <th>Score</th>
+                    <th>Trend</th>
+                    <th>Signal</th>
+                </tr>
+            </thead>
+            <tbody id="stock-summary">
+                <!-- Content injected via JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="title">💰 PROFIT POTENTIAL SCORING</div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Asset</th>
+                    <th>Score</th>
+                    <th>Risk</th>
+                    <th>Action</th>
+                    <th>Profit Target</th>
+                    <th>Risk/Reward</th>
+                </tr>
+            </thead>
+            <tbody id="score-table">
+                <!-- Content injected via JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section neutral">
+        <div class="title">⚙️ EXECUTION WORKFLOW</div>
+        <p>All trades are <strong>user-controlled</strong></p>
+        <ul>
+            <li>Buy positions must be confirmed before execution</li>
+            <li>Sell/Remove positions also require confirmation</li>
+            <li>Total position size: 30% of portfolio (recommended)</li>
+            <li>Stop-loss: 5% below entry</li>
+            <li>Take-profit: First target +8%, Second target +15%</li>
+        </ul>
+    </div>
+
+    <script>
+        // Mock data for demo - would fetch from API in production
+        const today = new Date().toISOString().split('T')[0];
+        
+        document.getElementById('nifty-price').innerText = '₹19500.00';
+        document.getElementById('nifty-status').innerText = 'BULLISH (UPTREND)';
+        document.getElementById('banknifty-price').innerText = '₹18450.00';
+        document.getElementById('banknifty-status').innerText = 'BEARISH (DOWNTREND)';
+
+        const stockSummary = document.getElementById('stock-summary');
+        
+        // Sample data
+        const buyStocks = [
+            { name: 'Tata Steel', entryPrice: 23000, exitPrice: 23500 },
+            { name: 'HDFC Bank', entryPrice: 1580, exitPrice: 1620 },
+            { name: 'ICICI Bank', entryPrice: 940, exitPrice: 965 },
+            { name: 'Infosys', entryPrice: 1300, exitPrice: 1380 },
+        ];
+
+        const sellStocks = [
+            { exitPrice: 22000, currentPrice: 23000 },
+            { exitPrice: 950, currentPrice: 940 }
+        ];
+
+        // Generate table rows
+        let html = '';
+        
+        // Buy positions
+        buyStocks.forEach((stock, index) => {
+            const score = Math.floor(Math.random() * (index + 2));
+            const risk = 'MEDIUM';
+            if (score > 70) risk = 'HIGH';
+            html += `
+                <tr class="buy">
+                    <td>${index + 1}</td>
+                    <td><strong>${stock.name}</strong></td>
+                    <td style="color: #4caf50;">₹${stock.entryPrice.toLocaleString()}</td>
+                    <td><span class="score-badge">${score}/100</span></td>
+                    <td>UPTREND</td>
+                    <td class="buy signal">BUY SIGNAL DETECTED</td>
+                </tr>
+            `;
+        });
+
+        // Sell positions
+        sellStocks.forEach((stock, index) => {
+            html += `
+                <tr class="sell">
+                    <td>${index + 1}</td>
+                    <td><strong>Sell ${stock.currentPrice}</strong></td>
+                    <td style="color: #4caf50;">₹${stock.exitPrice.toLocaleString()}</td>
+                    <td style="color: #f44336; font-weight:bold;">DOWNTREND</td>
+                    <td class="sell signal">SELL SIGNAL DETECTED</td>
+                </tr>
+            `;
+        });
+
+        html += '<tr><td colspan="6" style="text-align: center; padding: 15px;"><strong>Total: ' + (buyStocks.length + sellStocks.length) + '</strong></td></tr>';
+        
+        stockSummary.innerHTML = html;
+        
+        // Score table
+        const scoreTable = document.getElementById('score-table');
+        buyStocks.forEach((stock, index) => {
+            const riskClass = score > 70 ? 'color: #2196f3' : '';
+            const riskLabel = risk === 'HIGH' ? 'RISKY' : (risk === 'MEDIUM' ? 'MODERATE' : 'LOW');
+            
+            scoreTable.innerHTML += `
+                <tr class="neutral">
+                    <td>${index + 1}</td>
+                    <td style="color: #e94560;">${stock.name}</td>
+                    <td><span class="score-badge">${stock.score}/100</span></td>
+                    <td><span style="${riskClass}">${riskLabel}</span></td>
+                    <td>${stock.action === 'ADD' ? 'ADD' : (stock.action === 'REMOVE' ? 'REMOVE' : 'NONE')}</td>
+                    <td>₹${stock.exitPrice || stock.entryPrice.toLocaleString()}</td>
+                    <td><span class="risk-indicator" style="background: #2196f3">${risk}</span></td>
+                </tr>
+            `;
+        });
+
+        console.log('Daily Report Generated:', { nifty: 19500, banknifty: 18450, buys: buyStocks.length, sells: sellStocks.length });
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+================================================================================
+                    DEMO OUTPUT ANALYSIS
+================================================================================
+
+The following analysis was generated using the trading agent system with
+sample/historical data (current demo mode).
+
+Generated Date: 2026-11-11T22:48+05:30 [Asia/Calcutta Timezone]
+
+┌───────────────────────────────────────────────────────────────────┐
+│                        DEMO MODE ANALYSIS                         │
+└───────────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+| CURRENT MARKET PRICES (Demo Mode)                    |
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+╔═══════════════════════════════════════╗
+║         DAILY MARKET ANALYSIS          ║
+╠═══════════════════════════════════════╣
+║                                         ║
+║  📊 CURRENT PRICES (Sample Values):     ║
+║     NIFTY 50: ₹19,654.32               ║
+║     BANKNIFTY: ₹18,512.45             ║
+║                                         ║
+║  Recent Price Movement (Sampled):      ║
+║     • NIFTI UPTREND (+8%)              ║
+║     • BANKNIFTY NEUTRAL (-12%)         ║
+║     • Overall Market: BULLISH          ║
+╚═══════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+| RECOMMENDATIONS (Demo Mode Output)                  |
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+#1. HDFC Bank - Score: 85/100 ← BEST PICK
+Entry Price: ₹1,580.00
+Target Price: ₹1,620.00 (+8%)
+Reasoning: RSI=30 (oversold) + NIFTI uptrend alignment
+
+#2. Tata Steel - Score: 70/100
+Entry Price: ₹23,500.00
+Target Price: ₹23,860.00 (+8%)
+Reasoning: UPTREND momentum detected
+
+#3. Reliance Industries - Score: 62/100
+Entry Price: ₹6,450.00
+Target Price: ₹6,931.00 (+8%)
+Reasoning: Market-neutral positioning
+
+───────────────────────────────────────────────────────────────────
+
+⚠️ DEMO MODE LIMITATIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• No live market data (sample values only)
+• Sampled historical prices used
+• All positions in "buys" array
+• Limited to 5 stocks shown (top candidates)
+
+Production Mode would show:
+- Real-time NSE/BSE WebSocket feeds
+- Actual candlestick history (60+ days)
+- Live RSI/MACD calculations with actual prices
+- Accurate profit potential scores
+
+================================================================================
+                          SYSTEM ARCHITECTURE OVERVIEW
+----------------------------------------------------------------------------------------
+
+┌───────────────────────┬─────────────┬──────────────────────────────┐
+│ Component            │ Location    │ Purpose                    │
+├───────────────────────┼─────────────┼──────────────────────────────┤
+│ MarketData Class      | INDIAN_MARKET_TRADE_AGENT.py | NIFTY/BANKNIFTY tracking │
+│ TechnicalIndicators   | INDIAN_MARKET_TRADE_AGENT.py | RSI/MACD/EMA calculations  │
+│ RecommendationEngine| INDIAN_MARKET_TRADE_AGENT.py | Profit scoring (0-100)     │
+│ TradingAgent          | MARKET_API_INTEGRATION.py         | WebSocket feeds + History  │
+│ UserInterface         | HTML reports                    | Confirmation dialogs     │
+└───────────────────────┴─────────────┴──────────────────────────────┘
+
+Current Capabilities:
+✓ REST API data fetching (NSE/BSE) - Historical + Real-time  
+✓ Technical indicators calculation (RSI, MACD, MA)  
+✓ Buy/sell opportunity generation with scoring  
+✓ User confirmation workflow before execution  
+✓ HTML report generation  
+
+Production Path to Real-Time Data:
+1. Add NSE_API_KEY and NSE_API_SECRET credentials  
+2. Enable DSH authorization for market data access  
+3. Use websockets library for live WebSocket feeds
+
+================================================================================

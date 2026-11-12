@@ -1,0 +1,24 @@
+# Python
+*.pyc
+__pycache__/
+*.py[cod]$
+*$py.classino
+.Python
+venv/
+env/
+# DSH
+.idea/
+.vscode/
+.DS_Store
+*.log
+# Documentation
+*.{md,txt,rst}
+# Report templates
+*_REPORT.txt
+*DAILY_*.txt
+# Scripts
+SCRIPTS/
+*.tmp
+# IDE specific
+.vscode/*-server.json
+.vscode/package.json

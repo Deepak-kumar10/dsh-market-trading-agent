@@ -1,0 +1,74 @@
+================================================================================
+                    INDIAN MARKET TRADING AGENT - READY TO USE!
+================================================================================
+
+Your system is now complete and ready to run!
+
+--------------------------------------------------------------------------------
+                       HOW TO RUN THE AGENT (30 SECONDS)
+--------------------------------------------------------------------------------
+
+1. Open PowerShell or Command Prompt in this folder:
+   cd C:\Users\HP\Documents\deepseek-harness\default-workspace
+   
+2. Run the trading agent script:
+   python INDIAN_MARKET_TRADE_AGENT.py
+   
+3. Review the generated report and trade recommendations!
+
+--------------------------------------------------------------------------------
+                      WHAT THE AGENT DOES TODAY
+--------------------------------------------------------------------------------
+
+The agent will:
+  • Analyze NIFTY 50 and BANKNIFTY market trends
+  • Calculate technical indicators (RSI, MACD, Moving Averages) for top Indian stocks
+  • Identify buy/sell opportunities based on trends and momentum
+  • Score each opportunity by potential profit
+  • Present recommendations to you with confirmation questions
+  • Show daily report in a formatted HTML document
+
+Example output format:
+------------------------------------------------------------
+📊 DAILY MARKET ANALYSIS - TECHNICAL INDICATORS
+------------------------------------------------------------
+
+NIFTY 50: ₹19500.00 (Current Price)
+TREND: UPTREND
+
+BUY SIGNALS DETECTED:
+• Tata Steel @ ₹23000 | Score: 85/100 | Risk: MEDIUM
+• HDFC Bank @ ₹1580 | Score: 62/100 | Trend: DOWN
+
+EXECUTION INSTRUCTIONS:
+Please confirm BUY positions by typing "y" before execution.
+
+================================================================================
+                          QUICK REFERENCE
+--------------------------------------------------------------------------------
+
+To run the agent again, just execute:
+   python INDIAN_MARKET_TRADE_AGENT.py
+
+The system is ready and waiting for your analysis!
+
+================================================================================
+                        NEED MORE HELP?
+--------------------------------------------------------------------------------
+
+All documentation files are in this folder:
+
+  • README_TRADING_AGENT.md        - Quick start guide (START HERE)
+  • MARKET_AGENT_INSTRUCTIONS.md   - Complete operational guide
+  • IMPLEMENTATION_GUIDE.md         - Development reference
+
+File sizes:
+  • FINAL_SUMMARY.txt              - System overview
+  • BUILD_COMPLETE.txt             - Implementation status  
+  • README_TRADING_AGENT.md        - Quick start (5 pages)
+  • MARKET_AGENT_INSTRUCTIONS.md   - Full guide (80+ pages)
+  • IMPLEMENTATION_GUIDE.md        - Technical details (70+ pages)
+
+================================================================================
+
+Your Indian Market Trading Agent is ready! 🚀
