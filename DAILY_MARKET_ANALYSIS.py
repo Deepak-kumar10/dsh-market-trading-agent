@@ -340,29 +340,7 @@ def generate_report():
     # Market Analysis Summary
     print("\n📊 MARKET OVERVIEW")
     print("-" * 70)
-    print("""
-╔═══════════════════════════════════════════════════╗
-║           DAILY MARKET RECOMMENDATIONS              ║
-╠═══════════════════════════════════════════════════╣
-║                                                 ║
-║  📈 CURRENT PRICES:                              ║
-║     NIFTY 50: ₹{nifty_price}                     ║
-║     BANKNIFTY: ₹{banknifty_price}              ║
-║                                                 ║
-║  📈 MARKET TRENDS:                             ║
-║     {trend_text}                               ║
-║     - {nifty_trend.upper()}                      ║
-║     - {banknifty_trend.upper()}                ║
-║     - Total: {overall_trend}                   ║
-║                                                 ║
-║  💰 BUY PORTFOLIO (High Profit Potential):     ║
-║     ┌──────────────────┐                       ║
-║     │ {buys[0]['stock']} | Score: {buys[0]['score']}/100│ ← Top Pick   ║
-║     │ Entry: ₹{buys[0]['entry_price']}  ║                  ║
-║     │ Target: ₹{(buys[0]['target1'] or 'N/A')}│                  ║
-║     └──────────────────┘                       ║
-╚═══════════════════════════════════════════════════╝
-""")
+    print("Daily market recommendations report template.")
     
     print(f"{'#'.ljust(3), '{stock_name}'.ljust(21), 'Entry ₹{entry_price:,.0f}', 'Score', 'Target' if target else '-')}")
     for i, pos in enumerate(buys[:5], 1):
