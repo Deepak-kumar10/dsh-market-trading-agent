@@ -193,3 +193,4 @@ Demo mode generates all expected outputs perfectly.
 Production mode requires NSE API credentials and WebSocket integration.
 
 ================================================================================
+""")

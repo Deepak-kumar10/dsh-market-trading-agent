@@ -296,37 +296,7 @@ def run_production_mode_analysis():
     
     print("\n📊 PRODUCTION MODE RECOMMENDATION STRUCTURE:")
     print("-" * 70)
-    print("""
-┌───────────────────────────────────────────────────────────────┐
-│                    PRODUCTION ANALYSIS FRAMEWORK              │
-├───────────────────────────────────────────────────────────────┤
-│                                                             │
-│  PHASE 1: INDEX ANALYSIS                                      │
-│  - NIFTY/BANKNIFTY prices and trends                       │
-│  - Trend direction (UPTREND/DOWNTREND/NEUTRAL)             │
-│  - Momentum assessment                                        │
-│                                                             │
-│  PHASE 2: STOCK ANALYSIS                                      │
-│  - Top Indian stocks screened (Tata Steel, Reliance, etc.)   │
-│  - Technical indicators (RSI, MACD, Moving Averages)        │
-│  - Support/Resistance level detection                       │
-│                                                             │
-│  PHASE 3: TRADE OPPORTUNITY GENERATION                      │
-│  - BUY positions prioritized by profit potential          │
-│  - SELL/REMOVE from technical pullbacks                    │
-│  - Multi-factor scoring algorithm                          │
-│                                                             │
-│  PHASE 4: RISK MANAGEMENT                                   │
-│  - Position sizing (max 30% portfolio)                      │
-│  - Stop-loss: 5% below entry                                 │
-│  - Take-profit tiers (+8%, +15%)                            │
-│  - Cash buffer: 20% minimum                                │
-│                                                             │
-└───────────────────────────────────────────────────────────────┘
-
-   ⚠️  Note: Production mode uses live market data. Demo mode
-          uses mock sample prices for testing."
-    )
+    print("Production analysis framework uses live market data; demo mode uses mock sample prices.")
     print("-" * 70)
 
 def generate_report():
@@ -340,35 +310,9 @@ def generate_report():
     # Market Analysis Summary
     print("\n📊 MARKET OVERVIEW")
     print("-" * 70)
-    print("""
-╔═══════════════════════════════════════════════════╗
-║           DAILY MARKET RECOMMENDATIONS              ║
-╠═══════════════════════════════════════════════════╣
-║                                                 ║
-║  📈 CURRENT PRICES:                              ║
-║     NIFTY 50: ₹{nifty_price}                     ║
-║     BANKNIFTY: ₹{banknifty_price}              ║
-║                                                 ║
-║  📈 MARKET TRENDS:                             ║
-║     {trend_text}                               ║
-║     - {nifty_trend.upper()}                      ║
-║     - {banknifty_trend.upper()}                ║
-║     - Total: {overall_trend}                   ║
-║                                                 ║
-║  💰 BUY PORTFOLIO (High Profit Potential):     ║
-║     ┌──────────────────┐                       ║
-║     │ {buys[0]['stock']} | Score: {buys[0]['score']}/100│ ← Top Pick   ║
-║     │ Entry: ₹{buys[0]['entry_price']}  ║                  ║
-║     │ Target: ₹{(buys[0]['target1'] or 'N/A')}│                  ║
-║     └──────────────────┘                       ║
-╚═══════════════════════════════════════════════════╝
-""")
+    print("Daily market recommendations report template.")
     
-    print(f"{'#'.ljust(3), '{stock_name}'.ljust(21), 'Entry ₹{entry_price:,.0f}', 'Score', 'Target' if target else '-')}")
-    for i, pos in enumerate(buys[:5], 1):
-        score = pos.get('score', 0)
-        print(f"   {i:3}. {pos['stock_name']:38} {entry_price:>9,}" if pos['target'] else f"      Entry ₹{entry_price:>9,}")
-        print(f"          {buys[0]['score']:6.1f}/{len(buys)}  " if i == 1 else f"        Score: {pos.get('score', 'N/A')}")
+    print("No scored positions are available in this report template.")
 
 # ============================================================================
 # MAIN EXECUTION

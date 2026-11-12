@@ -149,17 +149,17 @@ for i, (stock_name, ticker) in enumerate([
 ], 1):
     
     # Get simulated data
+    base_price = prices['nifty_price'] + i * 20
     candle_data = [
-        {'close': (prices['nifty_price'] + i * 20), 'high': prices['nifty_price'] + i * 21,
-         'low': prices['nifty_price'] - i * 22, 'open': prices['nifty_price'] - 5},
-        {'close': (prices['nifty_price'] + i * 20) + (i < len(prices)) and (i*20)/len(prices)*10 if i > 0 else 0,
-         'high': max((c['high'] for c in candle_data), key=lambda x: x['close'])},
-        {'close': prices['nifty_price'] + i * 19,
-         'high': max((c['high'] for c in candle_data), key=lambda x: x['close']),
-         'low': min((c['low'] for c in candle_data), key=lambda x: x['low'])},
-        {'close': prices['nifty_price'], 'high': prices['nifty_price'] + 20, 'low': prices['nifty_price'] - 30}
-    ] if i < len(prices) else candle_data[-1:] if prices and i > 0 else candle_data[-3:]]
-    
+        {
+            'open': base_price + j * 2 - 1,
+            'high': base_price + j * 2 + 5,
+            'low': base_price + j * 2 - 5,
+            'close': base_price + j * 2,
+        }
+        for j in range(20)
+    ]
+
     # Get historical data for trend analysis
     start_idx = max(0, len(candle_data) - 5)
     recent_candles = [c['close'] for c in candle_data[start_idx:-2]]
