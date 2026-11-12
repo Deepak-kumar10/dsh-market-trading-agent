@@ -258,19 +258,22 @@ class MarketAPI:
         
         for i in range(1, len(prices)):
             if prices[i] > prices[i-1]:
-                if prices[i] > max(p for p in peaks):
+                if not peaks or prices[i] > max(p for p, _ in peaks):
                     peaks.append((prices[i], i))
             
             if prices[i] < prices[i-1]:
-                if prices[i] < min(p for p in valleys):
+                if not valleys or prices[i] < min(p for p, _ in valleys):
                     valleys.append((prices[i], i))
         
         # Get recent peak and valley (top of chart is current high, bottom is current low)
         if peaks:
-            peak = max(peaks[-1], price * i / 2 for _, i in peaks[-1])
-            return None, peak
-        
-        return min(v for _, v in valleys), max(p for p, _ in peaks)
+            peak = max(p for p, _ in peaks)
+            support = min(v for v, _ in valleys) if valleys else None
+            return support, peak
+
+        if valleys:
+            return min(v for v, _ in valleys), None
+        return None, None
 
     def calculate_indicators(self, current_prices: List[Dict]) -> Dict[str, Any]:
         """Calculate technical indicators for all price series"""
