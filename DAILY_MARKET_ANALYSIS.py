@@ -296,37 +296,7 @@ def run_production_mode_analysis():
     
     print("\n📊 PRODUCTION MODE RECOMMENDATION STRUCTURE:")
     print("-" * 70)
-    print("""
-┌───────────────────────────────────────────────────────────────┐
-│                    PRODUCTION ANALYSIS FRAMEWORK              │
-├───────────────────────────────────────────────────────────────┤
-│                                                             │
-│  PHASE 1: INDEX ANALYSIS                                      │
-│  - NIFTY/BANKNIFTY prices and trends                       │
-│  - Trend direction (UPTREND/DOWNTREND/NEUTRAL)             │
-│  - Momentum assessment                                        │
-│                                                             │
-│  PHASE 2: STOCK ANALYSIS                                      │
-│  - Top Indian stocks screened (Tata Steel, Reliance, etc.)   │
-│  - Technical indicators (RSI, MACD, Moving Averages)        │
-│  - Support/Resistance level detection                       │
-│                                                             │
-│  PHASE 3: TRADE OPPORTUNITY GENERATION                      │
-│  - BUY positions prioritized by profit potential          │
-│  - SELL/REMOVE from technical pullbacks                    │
-│  - Multi-factor scoring algorithm                          │
-│                                                             │
-│  PHASE 4: RISK MANAGEMENT                                   │
-│  - Position sizing (max 30% portfolio)                      │
-│  - Stop-loss: 5% below entry                                 │
-│  - Take-profit tiers (+8%, +15%)                            │
-│  - Cash buffer: 20% minimum                                │
-│                                                             │
-└───────────────────────────────────────────────────────────────┘
-
-   ⚠️  Note: Production mode uses live market data. Demo mode
-          uses mock sample prices for testing."
-    )
+    print("Production analysis framework uses live market data; demo mode uses mock sample prices.")
     print("-" * 70)
 
 def generate_report():
