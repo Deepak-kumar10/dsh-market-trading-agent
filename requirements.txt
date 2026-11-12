@@ -1,0 +1,2 @@
+# Runtime dependencies used by the current HTTP-based prototypes
+requests>=2.31,<3.0
